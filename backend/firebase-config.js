@@ -1,9 +1,9 @@
 /**
- * Firebase Admin initialization — Spark plan / Firestore only (no Google Cloud billing).
- * Supports:
- *   - FIREBASE_SERVICE_ACCOUNT_PATH (recommended) — path to downloaded JSON key file
- *   - FIREBASE_CONFIG — single-line JSON string
- *   - FIREBASE_PROJECT_ID + FIREBASE_PRIVATE_KEY + FIREBASE_CLIENT_EMAIL
+ * Firebase Admin — Spark plan / Firestore only.
+ *
+ * Local dev:  FIREBASE_SERVICE_ACCOUNT_PATH=./your-adminsdk.json
+ * Railway:    FIREBASE_CONFIG=<full service account JSON>  (required — file path does not work in Docker)
+ * Or:         FIREBASE_PROJECT_ID + FIREBASE_PRIVATE_KEY + FIREBASE_CLIENT_EMAIL
  */
 const fs = require('fs');
 const path = require('path');
@@ -11,19 +11,35 @@ const admin = require('firebase-admin');
 
 let db = null;
 
+function isRailway() {
+  return Boolean(
+    process.env.RAILWAY_ENVIRONMENT ||
+      process.env.RAILWAY_PROJECT_ID ||
+      process.env.RAILWAY_SERVICE_ID
+  );
+}
+
+function parseJsonEnv(raw) {
+  let s = raw.trim();
+  if (
+    (s.startsWith('"') && s.endsWith('"')) ||
+    (s.startsWith("'") && s.endsWith("'"))
+  ) {
+    s = s.slice(1, -1);
+  }
+  return JSON.parse(s);
+}
+
 function loadServiceAccountFromFile() {
   const configured = process.env.FIREBASE_SERVICE_ACCOUNT_PATH?.trim();
-  const candidates = configured
-    ? [configured]
-    : [];
+  const candidates = configured ? [configured] : [];
 
   if (!configured) {
-    const backendDir = path.join(__dirname);
     try {
       const matches = fs
-        .readdirSync(backendDir)
+        .readdirSync(__dirname)
         .filter((f) => f.includes('firebase-adminsdk') && f.endsWith('.json'));
-      candidates.push(...matches.map((f) => path.join(backendDir, f)));
+      candidates.push(...matches.map((f) => path.join(__dirname, f)));
     } catch {
       /* ignore */
     }
@@ -34,18 +50,53 @@ function loadServiceAccountFromFile() {
       ? candidate
       : path.resolve(__dirname, candidate);
     if (!fs.existsSync(filePath)) continue;
-    const raw = fs.readFileSync(filePath, 'utf8');
-    return JSON.parse(raw);
+    return parseJsonEnv(fs.readFileSync(filePath, 'utf8'));
   }
   return null;
 }
 
+function loadServiceAccountFromConfigEnv() {
+  const sources = [
+    process.env.FIREBASE_CONFIG,
+    process.env.FIREBASE_SERVICE_ACCOUNT_JSON,
+    process.env.GOOGLE_APPLICATION_CREDENTIALS_JSON,
+  ];
+
+  for (const raw of sources) {
+    if (!raw?.trim()) continue;
+    try {
+      return parseJsonEnv(raw);
+    } catch (err) {
+      throw new Error(`Invalid Firebase JSON env: ${err.message}`);
+    }
+  }
+
+  if (process.env.FIREBASE_CONFIG_BASE64?.trim()) {
+    try {
+      const decoded = Buffer.from(process.env.FIREBASE_CONFIG_BASE64.trim(), 'base64').toString(
+        'utf8'
+      );
+      return parseJsonEnv(decoded);
+    } catch (err) {
+      throw new Error(`Invalid FIREBASE_CONFIG_BASE64: ${err.message}`);
+    }
+  }
+
+  return null;
+}
+
 function buildServiceAccountFromEnv() {
-  const projectId = process.env.FIREBASE_PROJECT_ID;
-  const privateKey = process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n');
-  const clientEmail = process.env.FIREBASE_CLIENT_EMAIL;
+  const projectId = process.env.FIREBASE_PROJECT_ID?.trim();
+  let privateKey = process.env.FIREBASE_PRIVATE_KEY;
+  const clientEmail = process.env.FIREBASE_CLIENT_EMAIL?.trim();
 
   if (!projectId || !privateKey || !clientEmail) return null;
+
+  privateKey = privateKey.replace(/\\n/g, '\n');
+  if (!privateKey.includes('\n') && privateKey.includes('BEGIN PRIVATE KEY')) {
+    privateKey = privateKey.replace(/-----BEGIN PRIVATE KEY-----/, '-----BEGIN PRIVATE KEY-----\n');
+    privateKey = privateKey.replace(/-----END PRIVATE KEY-----/, '\n-----END PRIVATE KEY-----');
+  }
 
   return {
     type: process.env.FIREBASE_TYPE || 'service_account',
@@ -65,11 +116,54 @@ function getServiceAccount() {
   const fromFile = loadServiceAccountFromFile();
   if (fromFile) return fromFile;
 
-  const raw = process.env.FIREBASE_CONFIG;
-  if (raw?.trim()) {
-    return JSON.parse(raw);
-  }
+  const fromJson = loadServiceAccountFromConfigEnv();
+  if (fromJson) return fromJson;
+
   return buildServiceAccountFromEnv();
+}
+
+function getFirebaseEnvStatus() {
+  const pathVar = process.env.FIREBASE_SERVICE_ACCOUNT_PATH?.trim();
+  const pathResolved = pathVar
+    ? path.resolve(__dirname, pathVar)
+    : null;
+  const pathExists = pathResolved ? fs.existsSync(pathResolved) : false;
+
+  return {
+    railway: isRailway(),
+    filePathSet: Boolean(pathVar),
+    filePathExists: pathExists,
+    firebaseConfigSet: Boolean(process.env.FIREBASE_CONFIG?.trim()),
+    firebaseJsonAliasSet: Boolean(process.env.FIREBASE_SERVICE_ACCOUNT_JSON?.trim()),
+    individualVarsSet: Boolean(
+      process.env.FIREBASE_PROJECT_ID &&
+        process.env.FIREBASE_PRIVATE_KEY &&
+        process.env.FIREBASE_CLIENT_EMAIL
+    ),
+  };
+}
+
+function logFirebaseSetupHelp() {
+  const s = getFirebaseEnvStatus();
+  console.error('[Firebase] Not configured — Firestore API will return empty data.');
+  console.error('[Firebase] Railway / production: add variable FIREBASE_CONFIG (full service account JSON).');
+  console.error('[Firebase] Do NOT use FIREBASE_SERVICE_ACCOUNT_PATH on Railway — the JSON file is not in the Docker image.');
+
+  if (s.filePathSet && !s.filePathExists) {
+    console.error(
+      `[Firebase] FIREBASE_SERVICE_ACCOUNT_PATH is set but file is missing${s.railway ? ' (expected on Railway)' : ''}.`
+    );
+  }
+
+  if (s.railway) {
+    console.error('[Firebase] Railway → Service → Variables → New variable:');
+    console.error('[Firebase]   Name:  FIREBASE_CONFIG');
+    console.error('[Firebase]   Value: paste entire *-firebase-adminsdk-*.json (use Raw editor)');
+    console.error('[Firebase] Also set: JWT_SECRET, NODE_ENV=production, PORT=3001');
+    console.error('[Firebase] Local helper: node scripts/printFirebaseConfigForRailway.js');
+  } else {
+    console.error('[Firebase] Local: set FIREBASE_SERVICE_ACCOUNT_PATH=./your-adminsdk.json in backend/.env');
+  }
 }
 
 function initFirebase() {
@@ -79,14 +173,13 @@ function initFirebase() {
   try {
     serviceAccount = getServiceAccount();
   } catch (err) {
-    console.error('[Firebase] Invalid FIREBASE_CONFIG JSON:', err.message);
+    console.error('[Firebase] Credential parse error:', err.message);
+    logFirebaseSetupHelp();
     return null;
   }
 
   if (!serviceAccount?.project_id && !serviceAccount?.projectId) {
-    console.warn(
-      '[Firebase] Not configured — set FIREBASE_SERVICE_ACCOUNT_PATH, FIREBASE_CONFIG, or FIREBASE_PROJECT_ID + FIREBASE_PRIVATE_KEY + FIREBASE_CLIENT_EMAIL'
-    );
+    logFirebaseSetupHelp();
     return null;
   }
 
@@ -117,17 +210,11 @@ function getFirestore() {
 }
 
 function isFirebaseConfigured() {
-  if (process.env.FIREBASE_SERVICE_ACCOUNT_PATH?.trim()) {
-    const p = path.resolve(__dirname, process.env.FIREBASE_SERVICE_ACCOUNT_PATH);
-    if (fs.existsSync(p)) return true;
+  try {
+    return Boolean(getServiceAccount());
+  } catch {
+    return false;
   }
-  if (loadServiceAccountFromFile()) return true;
-  if (process.env.FIREBASE_CONFIG?.trim()) return true;
-  return Boolean(
-    process.env.FIREBASE_PROJECT_ID &&
-      process.env.FIREBASE_PRIVATE_KEY &&
-      process.env.FIREBASE_CLIENT_EMAIL
-  );
 }
 
 function getAuth() {
@@ -140,5 +227,7 @@ module.exports = {
   getFirestore,
   getAuth,
   isFirebaseConfigured,
+  getFirebaseEnvStatus,
+  logFirebaseSetupHelp,
   admin,
 };

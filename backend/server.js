@@ -5,13 +5,20 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
-const { initFirebase, isFirebaseConfigured } = require('./firebase-config');
+const {
+  initFirebase,
+  isFirebaseConfigured,
+  logFirebaseSetupHelp,
+} = require('./firebase-config');
 const restaurantsRouter = require('./routes/restaurants');
 
 const app = express();
 const PORT = Number(process.env.PORT) || 3001;
 
-initFirebase();
+const firestoreDb = initFirebase();
+if (!firestoreDb) {
+  logFirebaseSetupHelp();
+}
 
 app.use(cors());
 app.use(express.json({ limit: '2mb' }));

@@ -68,24 +68,42 @@ curl https://YOUR_RAILWAY_URL/health
 | `backend/` ✅ | Express on port 3001, `/health` works |
 | Repo root (Expo) ❌ | Metro bundler JSON |
 
-## 2. Environment variables
+## 2. Environment variables (required)
 
 In Railway → your service → **Variables**, add:
 
 | Variable | Value |
 |----------|--------|
-| `FIREBASE_CONFIG` | Full service account JSON (single line) |
+| `FIREBASE_CONFIG` | **Full** service account JSON (see below) |
 | `JWT_SECRET` | Strong production secret |
 | `NODE_ENV` | `production` |
 | `PORT` | `3001` |
 
-**`FIREBASE_CONFIG`:** Copy the entire contents of your `*-firebase-adminsdk-*.json` file. Paste as one line in Railway’s variable editor (or use Railway’s JSON secret UI).
+### ⚠️ `FIREBASE_SERVICE_ACCOUNT_PATH` does NOT work on Railway
 
-Optional (local dev only — do not rely on file path in Railway):
+Your local `backend/.env` uses a **file path**. The Docker image **does not include** the JSON key file (security). If logs show:
 
-| Variable | Value |
-|----------|--------|
-| `FIREBASE_SERVICE_ACCOUNT_PATH` | Not used in Railway Docker builds |
+```text
+[Firebase] Not configured — set FIREBASE_CONFIG ...
+```
+
+you must add **`FIREBASE_CONFIG`** in Railway (not the file path).
+
+### Generate `FIREBASE_CONFIG` from your local JSON file
+
+```powershell
+cd backend
+node scripts/printFirebaseConfigForRailway.js
+```
+
+Copy the printed line → Railway → **Variables** → **New Variable**:
+
+- **Name:** `FIREBASE_CONFIG`
+- **Value:** paste the full JSON (Railway **Raw** editor works)
+
+Redeploy after saving variables.
+
+**Alternative:** set `FIREBASE_PROJECT_ID`, `FIREBASE_PRIVATE_KEY`, `FIREBASE_CLIENT_EMAIL`, and optional `FIREBASE_PRIVATE_KEY_ID` individually (private key with `\n` for newlines).
 
 ## 3. Auto deploy
 
