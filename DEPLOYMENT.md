@@ -33,7 +33,7 @@ Firebase Firestore (localbite-d8cc0)
 ## Phase 2 — Push to deploy (Railway)
 
 1. Commit deployment changes on `main`.
-2. Push to GitHub: `GUT4I/LocalBite`.
+2. Push to GitHub: `GUT41/LocalBite`.
 3. Railway auto-builds from `backend/Dockerfile` when `backend/` changes.
 
 Detailed Railway steps: **[backend/RAILWAY_DEPLOY.md](backend/RAILWAY_DEPLOY.md)**
@@ -41,7 +41,7 @@ Detailed Railway steps: **[backend/RAILWAY_DEPLOY.md](backend/RAILWAY_DEPLOY.md)
 ### Railway project setup (summary)
 
 1. [railway.app](https://railway.app) → GitHub login  
-2. New Project → Deploy from GitHub → `GUT4I/LocalBite`  
+2. New Project → Deploy from GitHub → `GUT41/LocalBite`  
 3. **Root Directory:** `backend` ← **critical** (see troubleshooting below)  
 4. Add variables (see below)  
 5. Generate public domain  

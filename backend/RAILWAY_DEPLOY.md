@@ -1,7 +1,7 @@
 # Deploy LocalBite API to Railway
 
 Backend: Node.js + Express + Firebase Firestore (`localbite-d8cc0`).  
-Repo: [GUT4I/LocalBite](https://github.com/GUT4I/LocalBite)
+Repo: [GUT41/LocalBite](https://github.com/GUT41/LocalBite)
 
 ## Prerequisites
 
@@ -13,7 +13,7 @@ Repo: [GUT4I/LocalBite](https://github.com/GUT4I/LocalBite)
 
 1. Go to [railway.app](https://railway.app) and sign up / log in with **GitHub**.
 2. Click **New Project** → **Deploy from GitHub repo**.
-3. Select **`GUT4I/LocalBite`**.
+3. Select **`GUT41/LocalBite`**.
 
 ### ⚠️ Root Directory (required)
 
