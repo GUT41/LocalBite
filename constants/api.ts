@@ -1,2 +1,8 @@
-/** Re-export from single source of truth in utils/constants.ts */
-export { API_BASE_URL, API_TIMEOUT, EXPLORE_DEFAULT_COORDS } from '../utils/constants';
+/** Re-export from config/api.ts */
+export {
+  API_URL,
+  API_BASE_URL,
+  API_TIMEOUT,
+  PRODUCTION_API_URL,
+} from '../config/api';
+export { EXPLORE_DEFAULT_COORDS } from '../utils/constants';

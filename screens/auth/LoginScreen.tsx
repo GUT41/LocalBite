@@ -93,17 +93,21 @@ export default function LoginScreen({ navigation }: any) {
                 <TextInput
                   style={styles.input}
                   placeholder="Email"
+                  placeholderTextColor="#6B7280"
                   value={email}
                   onChangeText={setEmail}
                   autoCapitalize="none"
                   keyboardType="email-address"
+                  selectionColor="#FF6B35"
                 />
                 <TextInput
                   style={styles.input}
                   placeholder="Password"
+                  placeholderTextColor="#6B7280"
                   secureTextEntry
                   value={password}
                   onChangeText={setPassword}
+                  selectionColor="#FF6B35"
                 />
               </View>
               <TouchableOpacity
@@ -180,6 +184,10 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     paddingHorizontal: 15,
     marginBottom: 15,
+    fontSize: 16,
+    color: '#111827',
+    borderWidth: 1,
+    borderColor: '#E5E7EB',
   },
   button: {
     width: '100%',

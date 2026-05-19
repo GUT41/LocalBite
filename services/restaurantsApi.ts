@@ -19,7 +19,7 @@ function handleError(label: string, error: unknown): never {
         ? error.message
         : 'Request failed';
   if (msg === 'Network Error' || msg === 'Network request failed') {
-    msg = `Cannot reach backend at ${API_BASE_URL}. Start "node server.js" in /backend. Emulator: EXPO_PUBLIC_API_URL=http://10.0.2.2:3001 — Device: http://192.168.254.107:3001`;
+    msg = `Cannot reach backend at ${API_BASE_URL}. Check EXPO_PUBLIC_API_URL in .env and rebuild if needed.`;
   }
   console.warn(`[RestaurantsAPI] ${label}:`, msg);
   throw new Error(msg);
