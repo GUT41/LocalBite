@@ -1,0 +1,205 @@
+{
+  "generatedAt": "2026-05-19T02:34:15.809Z",
+  "count": 22,
+  "source": "unsplash",
+  "items": [
+    {
+      "id": "food_chicken-burger_1",
+      "name": "Chicken Burger",
+      "category": "Burgers",
+      "price": 160,
+      "rating": 4.1,
+      "imageUrl": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5NTUwNzd8MHwxfHNlYXJjaHwxfHxidXJnZXJ8ZW58MXwwfHx8MTc3OTE1NTE0OHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "createdAt": 1779158049175
+    },
+    {
+      "id": "food_beef-burger_2",
+      "name": "Beef Burger",
+      "category": "Burgers",
+      "price": 80,
+      "rating": 4.8,
+      "imageUrl": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5NTUwNzd8MHwxfHNlYXJjaHwxfHxiZWVmJTIwYnVyZ2VyfGVufDF8MHx8fDE3NzkxNTUxNDl8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "createdAt": 1779158049467
+    },
+    {
+      "id": "food_french-fries_3",
+      "name": "French Fries",
+      "category": "Sides",
+      "price": 150,
+      "rating": 3.6,
+      "imageUrl": "https://images.unsplash.com/photo-1630384060421-cb20d0e0649d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5NTUwNzd8MHwxfHNlYXJjaHwxfHxmcmVuY2glMjBmcmllc3xlbnwxfDB8fHwxNzc5MTU1MTQ5fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "createdAt": 1779158049771
+    },
+    {
+      "id": "food_fried-chicken_4",
+      "name": "Fried Chicken",
+      "category": "Fast Food",
+      "price": 120,
+      "rating": 4,
+      "imageUrl": "https://images.unsplash.com/photo-1569058242253-92a9c755a0ec?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5NTUwNzd8MHwxfHNlYXJjaHwxfHxmcmllZCUyMGNoaWNrZW58ZW58MXwwfHx8MTc3OTE1NTE1MHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "createdAt": 1779158050061
+    },
+    {
+      "id": "food_pepperoni-pizza_5",
+      "name": "Pepperoni Pizza",
+      "category": "Pizza",
+      "price": 135,
+      "rating": 4.3,
+      "imageUrl": "https://images.unsplash.com/photo-1513104890138-7c749659a591?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5NTUwNzd8MHwxfHNlYXJjaHwxfHxwaXp6YXxlbnwxfDB8fHwxNzc5MTU1MTUxfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "createdAt": 1779158050355
+    },
+    {
+      "id": "food_hawaiian-pizza_6",
+      "name": "Hawaiian Pizza",
+      "category": "Pizza",
+      "price": 80,
+      "rating": 4.9,
+      "imageUrl": "https://images.unsplash.com/photo-1562835155-a7c2a225e97d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5NTUwNzd8MHwxfHNlYXJjaHwxfHxoYXdhaWlhbiUyMHBpenphfGVufDF8MHx8fDE3NzkxNTUxNTJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "createdAt": 1779158050637
+    },
+    {
+      "id": "food_chicken-rice-meal_7",
+      "name": "Chicken Rice Meal",
+      "category": "Rice Meals",
+      "price": 185,
+      "rating": 4.6,
+      "imageUrl": "https://images.unsplash.com/photo-1569058242252-623df46b5025?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5NTUwNzd8MHwxfHNlYXJjaHwxfHxjaGlja2VuJTIwcmljZXxlbnwxfDB8fHwxNzc5MTU1MTUzfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "createdAt": 1779158050930
+    },
+    {
+      "id": "food_beef-rice-bowl_8",
+      "name": "Beef Rice Bowl",
+      "category": "Rice Meals",
+      "price": 235,
+      "rating": 4.5,
+      "imageUrl": "https://images.unsplash.com/photo-1682566509568-ded8649b26bb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5NTUwNzd8MHwxfHNlYXJjaHwxfHxiZWVmJTIwcmljZSUyMGJvd2x8ZW58MXwwfHx8MTc3OTE1NTE1M3ww&ixlib=rb-4.1.0&q=80&w=1080",
+      "createdAt": 1779158051224
+    },
+    {
+      "id": "food_spaghetti_9",
+      "name": "Spaghetti",
+      "category": "Noodles",
+      "price": 225,
+      "rating": 3.5,
+      "imageUrl": "https://images.unsplash.com/photo-1622973536968-3ead9e780960?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5NTUwNzd8MHwxfHNlYXJjaHwxfHxzcGFnaGV0dGl8ZW58MXwwfHx8MTc3OTE1NTE1NXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "createdAt": 1779158051512
+    },
+    {
+      "id": "food_pancit-canton_10",
+      "name": "Pancit Canton",
+      "category": "Noodles",
+      "price": 70,
+      "rating": 3.6,
+      "imageUrl": "https://images.unsplash.com/photo-1585032226651-759b368d7246?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5NTUwNzd8MHwxfHNlYXJjaHwxfHxub29kbGVzfGVufDF8MHx8fDE3NzkxNTUxNTV8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "createdAt": 1779158051810
+    },
+    {
+      "id": "food_milk-tea_11",
+      "name": "Milk Tea",
+      "category": "Drinks",
+      "price": 180,
+      "rating": 4.1,
+      "imageUrl": "https://images.unsplash.com/photo-1634299406775-90f32b656536?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5NTUwNzd8MHwxfHNlYXJjaHwxfHxtaWxrJTIwdGVhfGVufDF8MHx8fDE3NzkxNTUxNTZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "createdAt": 1779158052106
+    },
+    {
+      "id": "food_iced-coffee_12",
+      "name": "Iced Coffee",
+      "category": "Drinks",
+      "price": 210,
+      "rating": 4.7,
+      "imageUrl": "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5NTUwNzd8MHwxfHNlYXJjaHwxfHxpY2VkJTIwY29mZmVlfGVufDF8MHx8fDE3NzkxNTUxNTd8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "createdAt": 1779158052396
+    },
+    {
+      "id": "food_donut_13",
+      "name": "Donut",
+      "category": "Desserts",
+      "price": 210,
+      "rating": 3.9,
+      "imageUrl": "https://images.unsplash.com/photo-1527515545081-5db817172677?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5NTUwNzd8MHwxfHNlYXJjaHwxfHxkb251dHxlbnwxfDB8fHwxNzc5MTU1MTU4fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "createdAt": 1779158052694
+    },
+    {
+      "id": "food_ice-cream_14",
+      "name": "Ice Cream",
+      "category": "Desserts",
+      "price": 95,
+      "rating": 3.6,
+      "imageUrl": "https://images.unsplash.com/photo-1629385701021-fcd568a743e8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5NTUwNzd8MHwxfHNlYXJjaHwxfHxpY2UlMjBjcmVhbXxlbnwxfDB8fHwxNzc5MTU1MTU5fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "createdAt": 1779158052985
+    },
+    {
+      "id": "food_hotdog-sandwich_15",
+      "name": "Hotdog Sandwich",
+      "category": "Street Food",
+      "price": 200,
+      "rating": 3.7,
+      "imageUrl": "https://images.unsplash.com/photo-1612392062631-94dd858cba88?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5NTUwNzd8MHwxfHNlYXJjaHwxfHxob3Rkb2d8ZW58MXwwfHx8MTc3OTE1NTE2MHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "createdAt": 1779158053279
+    },
+    {
+      "id": "food_shawarma_16",
+      "name": "Shawarma",
+      "category": "Street Food",
+      "price": 65,
+      "rating": 4.1,
+      "imageUrl": "https://images.unsplash.com/photo-1662116765994-1e4200c43589?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5NTUwNzd8MHwxfHNlYXJjaHwxfHxzaGF3YXJtYXxlbnwxfDB8fHwxNzc5MTU1MTYwfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "createdAt": 1779158053569
+    },
+    {
+      "id": "food_sisig-rice_17",
+      "name": "Sisig Rice",
+      "category": "Rice Meals",
+      "price": 100,
+      "rating": 4.8,
+      "imageUrl": "https://images.unsplash.com/photo-1489710020360-66e504159b43?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5NTUwNzd8MHwxfHNlYXJjaHwxfHxmaWxpcGlubyUyMGZvb2R8ZW58MXwwfHx8MTc3OTE1NTE2MXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "createdAt": 1779158053863
+    },
+    {
+      "id": "food_bbq-skewers_18",
+      "name": "BBQ Skewers",
+      "category": "Street Food",
+      "price": 250,
+      "rating": 4,
+      "imageUrl": "https://images.unsplash.com/photo-1632158929413-168599fffbf7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5NTUwNzd8MHwxfHNlYXJjaHwxfHxiYnElMjBza2V3ZXJzfGVufDF8MHx8fDE3NzkxNTUxNjJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "createdAt": 1779158054156
+    },
+    {
+      "id": "food_tacos_19",
+      "name": "Tacos",
+      "category": "Street Food",
+      "price": 220,
+      "rating": 4.6,
+      "imageUrl": "https://images.unsplash.com/photo-1599974579688-8dbdd335c77f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5NTUwNzd8MHwxfHNlYXJjaHwxfHx0YWNvc3xlbnwxfDB8fHwxNzc5MTU1MTYzfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "createdAt": 1779158054447
+    },
+    {
+      "id": "food_cheesecake_20",
+      "name": "Cheesecake",
+      "category": "Desserts",
+      "price": 145,
+      "rating": 3.9,
+      "imageUrl": "https://images.unsplash.com/photo-1524351199678-941a58a3df50?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5NTUwNzd8MHwxfHNlYXJjaHwxfHxjaGVlc2VjYWtlfGVufDF8MHx8fDE3NzkxNTUxNjR8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "createdAt": 1779158054746
+    },
+    {
+      "id": "food_fish-and-chips_21",
+      "name": "Fish and Chips",
+      "category": "Fast Food",
+      "price": 95,
+      "rating": 4,
+      "imageUrl": "https://images.unsplash.com/photo-1579208030886-b937da0925dc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5NTUwNzd8MHwxfHNlYXJjaHwxfHxmaXNoJTIwYW5kJTIwY2hpcHN8ZW58MXwwfHx8MTc3OTE1NTE2NHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "createdAt": 1779158055048
+    },
+    {
+      "id": "food_caesar-salad_22",
+      "name": "Caesar Salad",
+      "category": "Healthy",
+      "price": 70,
+      "rating": 4.4,
+      "imageUrl": "https://images.unsplash.com/photo-1607532941433-304659e8198a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5NTUwNzd8MHwxfHNlYXJjaHwxfHxjYWVzYXIlMjBzYWxhZHxlbnwxfDB8fHwxNzc5MTU1MTY1fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "createdAt": 1779158055595
+    }
+  ]
+}

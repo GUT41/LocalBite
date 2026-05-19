@@ -1,0 +1,12 @@
+# Use when Railway Root Directory = backend (recommended)
+[build]
+dockerfile = "./Dockerfile"
+
+[deploy]
+startCommand = "npm start"
+healthcheckPath = "/health"
+healthcheckTimeout = 30
+
+[environments.production]
+PORT = "3001"
+NODE_ENV = "production"

@@ -1,0 +1,11 @@
+# Root Railway build — exclude Expo/mobile; only backend/ is copied via Dockerfile
+node_modules
+.expo
+.expo-shared
+android
+ios
+grabfood-api
+.git
+*.md
+.env
+.env.*

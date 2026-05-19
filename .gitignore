@@ -1,0 +1,51 @@
+# Expo
+.expo/
+.expo-shared/
+
+# Dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+backend/.env
+*-firebase-adminsdk-*.json
+backend/serviceAccount.json
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build outputs
+android/.gradle/
+android/build/
+android/app/build/
+build/
+dist/
+
+# React Native
+.bundle/
+.gradle
+local.properties
+
+# Logs
+logs/
+*.log
+
+# Misc
+*.jks
+*.p12
+*.p8
+*.mobileprovision
+*.orig.*

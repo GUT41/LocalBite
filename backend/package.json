@@ -1,0 +1,23 @@
+{
+  "name": "localbite-api",
+  "version": "2.0.0",
+  "private": true,
+  "main": "server.js",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "seed": "node scripts/seedFirestore.js",
+    "seed:food": "node seeds/generateFoodItems.js"
+  },
+  "dependencies": {
+    "axios": "^1.7.9",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "firebase-admin": "^13.0.2",
+    "jsonwebtoken": "^9.0.2"
+  }
+}

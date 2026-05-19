@@ -1,0 +1,16 @@
+# Repo-root Railway config (when Root Directory is NOT set to backend/).
+# Prefer: Railway Dashboard → Service → Settings → Root Directory = backend
+# Then backend/railway.toml + backend/Dockerfile are used instead.
+
+[build]
+builder = "DOCKERFILE"
+dockerfilePath = "Dockerfile"
+
+[deploy]
+startCommand = "npm start"
+healthcheckPath = "/health"
+healthcheckTimeout = 30
+
+[environments.production]
+PORT = "3001"
+NODE_ENV = "production"

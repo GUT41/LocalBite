@@ -1,0 +1,48 @@
+{
+  "expo": {
+    "name": "localbite",
+    "slug": "localbite",
+    "owner": "duriancatch",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "usesCleartextTraffic": true,
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.urnotit213.localbite",
+      "googleServicesFile": "./google-services.json",
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyCLYywepRsamqIj5vHYlkqK7rmtnM-ib_k"
+        }
+      }
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "@react-native-firebase/app",
+      "@react-native-firebase/auth"
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "421c081d-83a0-4796-96cb-756e1f1783ac"
+      }
+    }
+  }
+}
