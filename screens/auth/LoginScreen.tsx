@@ -45,26 +45,43 @@ export default function LoginScreen({ navigation }: any) {
       const userCredential = await auth().signInWithEmailAndPassword(em, password);
       const uid = userCredential.user.uid;
       
-      // Fetch user document from Firestore to check role
-      const userDocSnapshot = await firestore.default().collection('user').doc(uid).get();
+      // Wait a brief moment to ensure auth state is fully propagated
+      await new Promise(resolve => setTimeout(resolve, 100));
       
-      if (!userDocSnapshot.exists) {
-        // User doesn't have a document in Firestore
-        Alert.alert('Error', 'User profile not found. Please contact support.');
+      try {
+        // Fetch user document from Firestore to check role
+        const userDocSnapshot = await firestore.default().collection('user').doc(uid).get();
+        
+        if (!userDocSnapshot.exists) {
+          // User doesn't have a document in Firestore
+          Alert.alert('Error', 'User profile not found. Please contact support.');
+          await auth().signOut();
+          return;
+        }
+        
+        const userData = userDocSnapshot.data();
+        const role = userData?.role || 'user'; // Default to 'user' if no role specified
+        
+        // Route based on role
+        if (role === 'admin') {
+          navigation.replace('Admin');
+        } else {
+          navigation.replace('User');
+        }
+      } catch (firestoreErr: unknown) {
+        // Handle Firestore-specific errors
+        const errMsg = firestoreErr instanceof Error ? firestoreErr.message : '';
+        if (errMsg.includes('permission-denied') || errMsg.includes('PERMISSION_DENIED')) {
+          Alert.alert(
+            'Access Denied',
+            'Your account does not have permission to access this app. Please contact support.'
+          );
+        } else {
+          Alert.alert('Error', 'Could not load user profile. Please try again.');
+        }
         await auth().signOut();
         return;
       }
-      
-      const userData = userDocSnapshot.data();
-      const role = userData?.role || 'user'; // Default to 'user' if no role specified
-      
-      // Route based on role
-      if (role === 'admin') {
-        navigation.replace('Admin');
-      } else {
-        navigation.replace('User');
-      }
-      
     } catch (err: unknown) {
       const code =
         typeof err === 'object' && err !== null && 'code' in err ? String((err as { code: string }).code) : '';
@@ -118,6 +135,7 @@ export default function LoginScreen({ navigation }: any) {
                 <TextInput
                   style={styles.input}
                   placeholder="Email"
+                  placeholderTextColor="#888888"
                   value={email}
                   onChangeText={setEmail}
                   autoCapitalize="none"
@@ -126,6 +144,7 @@ export default function LoginScreen({ navigation }: any) {
                 <TextInput
                   style={styles.input}
                   placeholder="Password"
+                  placeholderTextColor="#888888"
                   secureTextEntry
                   value={password}
                   onChangeText={setPassword}
@@ -185,7 +204,7 @@ const styles = StyleSheet.create({
   inner: { flex: 1, justifyContent: 'center', alignItems: 'center' },
   card: { width: '90%', maxWidth: 400, padding: 28, borderRadius: 25, backgroundColor: '#FFFFFF', alignItems: 'center' },
   logo: { width: 88, height: 88, marginBottom: 8 },
-  title: { fontSize: 30, fontWeight: 'bold', color: '#FF6B35', marginBottom: 12 },
+  title: { fontSize: 30, fontWeight: 'bold', color: '#C2410C', marginBottom: 12 },
   expoBanner: {
     width: '100%',
     backgroundColor: '#FFF7ED',
@@ -201,10 +220,14 @@ const styles = StyleSheet.create({
   input: {
     width: '100%',
     height: 50,
-    backgroundColor: '#F3F4F6',
+    backgroundColor: '#FFFFFF',
+    borderWidth: 1,
+    borderColor: '#E5E7EB',
     borderRadius: 10,
     paddingHorizontal: 15,
     marginBottom: 15,
+    color: '#333333',
+    fontSize: 16,
   },
   button: {
     width: '100%',
@@ -215,8 +238,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   buttonDisabled: { opacity: 0.75 },
-  buttonText: { color: 'white', fontWeight: 'bold' },
-  link: { color: '#FF6B35', marginTop: 20 },
+  buttonText: { color: 'white', fontWeight: 'bold', fontSize: 16 },
+  link: { color: '#C2410C', marginTop: 20, fontSize: 15, fontWeight: '500' },
   demoBlock: { width: '100%', gap: 10 },
   demoBtn: {
     height: 48,
