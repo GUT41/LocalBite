@@ -39,7 +39,32 @@ export default function LoginScreen({ navigation }: any) {
     setEmailLoading(true);
     try {
       const { auth } = await import('../../utils/firebase');
-      await auth().signInWithEmailAndPassword(em, password);
+      const firestore = await import('@react-native-firebase/firestore');
+      
+      // Sign in with email and password
+      const userCredential = await auth().signInWithEmailAndPassword(em, password);
+      const uid = userCredential.user.uid;
+      
+      // Fetch user document from Firestore to check role
+      const userDocSnapshot = await firestore.default().collection('user').doc(uid).get();
+      
+      if (!userDocSnapshot.exists) {
+        // User doesn't have a document in Firestore
+        Alert.alert('Error', 'User profile not found. Please contact support.');
+        await auth().signOut();
+        return;
+      }
+      
+      const userData = userDocSnapshot.data();
+      const role = userData?.role || 'user'; // Default to 'user' if no role specified
+      
+      // Route based on role
+      if (role === 'admin') {
+        navigation.replace('Admin');
+      } else {
+        navigation.replace('User');
+      }
+      
     } catch (err: unknown) {
       const code =
         typeof err === 'object' && err !== null && 'code' in err ? String((err as { code: string }).code) : '';
@@ -93,21 +118,17 @@ export default function LoginScreen({ navigation }: any) {
                 <TextInput
                   style={styles.input}
                   placeholder="Email"
-                  placeholderTextColor="#6B7280"
                   value={email}
                   onChangeText={setEmail}
                   autoCapitalize="none"
                   keyboardType="email-address"
-                  selectionColor="#FF6B35"
                 />
                 <TextInput
                   style={styles.input}
                   placeholder="Password"
-                  placeholderTextColor="#6B7280"
                   secureTextEntry
                   value={password}
                   onChangeText={setPassword}
-                  selectionColor="#FF6B35"
                 />
               </View>
               <TouchableOpacity
@@ -184,10 +205,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     paddingHorizontal: 15,
     marginBottom: 15,
-    fontSize: 16,
-    color: '#111827',
-    borderWidth: 1,
-    borderColor: '#E5E7EB',
   },
   button: {
     width: '100%',
